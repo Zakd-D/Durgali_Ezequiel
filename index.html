@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNAPSE &amp; ÁRBOLES ANCESTRALES | Conexión Arbórea &amp; Bio-Gimbal Somático</title>
+  <meta name="description" content="Plataforma de sanación somática interactiva: interactúa con árboles ancestrales para equilibrar y purificar las ramificaciones de tu sistema nervioso central. Estabilización bio-gimbal para encontrar calma profunda incluso en momentos turbulentos personales.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="gimbal-stabilized-mode">
+
+  <!-- HUD Telemetry Top Bar: Bio-Gimbal Somático -->
+  <aside class="telemetry-bar" aria-label="Telemetría Bio-Gimbal">
+    <div class="telemetry-container">
+      <div class="telemetry-group">
+        <span class="pulse-indicator"></span>
+        <span class="telemetry-label">AMORTIGUADOR SOMÁTICO:</span>
+        <span class="telemetry-val" id="hud-stabilization-status">EQUILIBRIO ANTE TURBULENCIA ACTIVO</span>
+      </div>
+      <div class="telemetry-group">
+        <span class="telemetry-label">ENRAIZAMIENTO (ROLL):</span>
+        <span class="telemetry-val" id="hud-roll">+0.0°</span>
+        <span class="telemetry-label">PERSPECTIVA (PITCH):</span>
+        <span class="telemetry-val" id="hud-pitch">+0.0°</span>
+        <span class="telemetry-label">PROPÓSITO (YAW):</span>
+        <span class="telemetry-val" id="hud-yaw">0.0°</span>
+      </div>
+      <div class="telemetry-group">
+        <span class="telemetry-label">BIO-RESONANCIA:</span>
+        <span class="telemetry-val" id="hud-frequency">432 Hz / 528 Hz (Ondas Theta de Bosque)</span>
+      </div>
+      <div class="telemetry-group">
+        <button id="toggle-audio-btn" class="telemetry-action" title="Sonido Armónico de Bosque">
+          <i class="fa-solid fa-volume-xmark" id="audio-icon"></i> <span id="audio-label">Sonido Bosque</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Navigation -->
+  <header class="main-nav" id="main-nav">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" id="nav-brand-logo">
+        <div class="brand-symbol">
+          <i class="fa-solid fa-tree"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SYNAPSE &amp; ÁRBOLES ANCESTRALES</span>
+          <span class="brand-subtitle">Purificación Ramificada &amp; Bio-Gimbal</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="desktop-menu">
+        <a href="#bio-gimbal-concept" class="nav-link"><i class="fa-solid fa-scale-balanced"></i> El Bio-Gimbal Somático</a>
+        <a href="#tree-simulator" class="nav-link"><i class="fa-solid fa-seedling"></i> Conexión con Árboles</a>
+        <a href="#trip-simulator" class="nav-link"><i class="fa-solid fa-route"></i> Diseñador de Viaje</a>
+        <a href="#reels-showcase" class="nav-link"><i class="fa-solid fa-film"></i> Reels de Clientes</a>
+        <a href="#local-artisans" class="nav-link"><i class="fa-solid fa-store"></i> Boticarios del Bosque</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="open-itinerary-btn" class="itinerary-badge-btn" aria-label="Ver expedición personalizada">
+          <i class="fa-solid fa-compass-drafting"></i>
+          <span>Mi Expedición</span>
+          <span class="cart-count" id="itinerary-count-badge">0</span>
+        </button>
+        <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-menu-drawer" id="mobile-menu-drawer">
+    <button class="close-menu-btn" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+    <div class="mobile-links">
+      <a href="#bio-gimbal-concept" class="mobile-link">El Bio-Gimbal Somático</a>
+      <a href="#tree-simulator" class="mobile-link">Conexión con Árboles</a>
+      <a href="#trip-simulator" class="mobile-link">Diseñador de Viaje</a>
+      <a href="#reels-showcase" class="mobile-link">Reels de Clientes</a>
+      <a href="#local-artisans" class="mobile-link">Boticarios del Bosque</a>
+      <button class="btn btn-gold w-full mt-4" id="mobile-itinerary-btn">Ver Mi Expedición</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background-wrapper">
+        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80" alt="Santuario de Árboles Ancestrales y Estabilización Somática" class="hero-bg-img">
+        <div class="hero-gradient-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge animate-fade-in">
+          <i class="fa-solid fa-tree"></i>
+          <span>PURIFICACIÓN RAMIFICADA DEL SISTEMA NERVIOSO CENTRAL</span>
+        </div>
+        
+        <h1 class="hero-title animate-fade-in delay-1">
+          Sanación con Árboles &amp; Sensibilidad de <span class="text-gold">Gimbal Somático</span>
+        </h1>
+        
+        <p class="hero-desc animate-fade-in delay-2">
+          Cuando atraviesas momentos turbulentos personales, el sistema nervioso sufre sacudidas y sobrecarga. Al interactuar con diferentes árboles ancestrales (robles, sauces, eucaliptos, pinos), tu organismo activa un <em>bio-gimbal interno</em>: un sistema de amortiguación natural que absorbe el impacto emocional, purifica cada ramificación nerviosa y te devuelve a un estado suave, enraizado y cristalino.
+        </p>
+
+        <div class="hero-buttons animate-fade-in delay-3">
+          <a href="#tree-simulator" class="btn btn-gold btn-glow">
+            <i class="fa-solid fa-seedling"></i> Explorar Conexión con Árboles
+          </a>
+          <a href="#trip-simulator" class="btn btn-glass">
+            <i class="fa-solid fa-route"></i> Diseñar Ruta de Regeneración
+          </a>
+        </div>
+
+        <!-- Bio-Gimbal Live Stabilizer Widget -->
+        <div class="hero-gimbal-controller animate-fade-in delay-4">
+          <div class="gimbal-widget-header">
+            <div class="gimbal-status-dot"></div>
+            <span class="widget-title">CALIBRADOR DE AMORTIGUACIÓN SOMÁTICA (BIO-GIMBAL)</span>
+            <span class="widget-badge" id="gimbal-preset-name">Suavidad Óptima (1.0x)</span>
+          </div>
+
+          <p class="widget-subnote">
+            Simula cómo el soporte arbóreo absorbe las turbulencias de la vida cotidiana para que tu organismo permanezca en calma:
+          </p>
+
+          <div class="gimbal-controls-row">
+            <div class="gimbal-slider-box">
+              <label for="gimbal-sensitivity-slider">Capacidad de Amortiguación Somática:</label>
+              <input type="range" id="gimbal-sensitivity-slider" min="0.2" max="2.0" step="0.1" value="1.0">
+            </div>
+            <div class="gimbal-presets-btn-group">
+              <button class="preset-btn active" data-preset="cinematic">Equilibrio Suave</button>
+              <button class="preset-btn" data-preset="sport">Firmeza Dinámica</button>
+              <button class="preset-btn" data-preset="zen">Paz Profunda (Zen)</button>
+              <button class="preset-btn" data-preset="lock">Enraizamiento Fijo</button>
+            </div>
+          </div>
+
+          <div class="gimbal-horizon-display">
+            <div class="horizon-line" id="virtual-horizon-line"></div>
+            <div class="crosshair-center"></div>
+            <span class="horizon-feedback" id="gimbal-feedback-text">Tus ejes nerviosos se nivelan con la serenidad del bosque</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EL CONCEPTO DEL BIO-GIMBAL ANTE LA TURBULENCIA -->
+    <section class="section philosophy-section" id="bio-gimbal-concept">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-kicker">EL BIO-GIMBAL: ESTABILIDAD EN MOMENTOS TURBULENTOS</span>
+          <h2 class="section-title">¿Cómo un Gimbal Equilibra tu Organismo ante las Crisis?</h2>
+          <p class="section-subtitle">
+            Un gimbal no elimina el movimiento del mundo exterior; lo que hace es <strong>neutralizar la vibración brusca</strong> para que la lente mantenga una perspectiva fluida y limpia. En la vida humana, cuando atravesamos crisis, duelos o estrés agudo, nuestro sistema nervioso entra en turbulencia somática. Los árboles ancestrales actúan como el estabilizador biológico más antiguo de la Tierra:
+          </p>
+        </div>
+
+        <!-- Interactive Somatic Turbulence Simulator Comparison -->
+        <div class="turbulence-simulator-card">
+          <div class="turb-header">
+            <div class="turb-title">
+              <i class="fa-solid fa-wave-square text-gold"></i>
+              <h3>Monitor de Respuesta Somática: Turbulencia vs. Estabilización Arbórea</h3>
+            </div>
+            <div class="turb-actions">
+              <button id="btn-trigger-turbulence" class="btn btn-sm btn-outline-danger">
+                <i class="fa-solid fa-bolt"></i> Simular Turbulencia Personal (Estrés/Crisis)
+              </button>
+              <button id="btn-trigger-stabilize" class="btn btn-sm btn-gold">
+                <i class="fa-solid fa-tree"></i> Aplicar Amortiguación de Árboles (Paz Vagal)
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Wave Canvas -->
+          <div class="wave-visualizer-container">
+            <canvas id="neural-wave-canvas" width="800" height="140"></canvas>
+            <div class="wave-legend">
+              <div class="legend-item"><span class="legend-dot dot-turbulent"></span> Impulsos Desordenados / Cortisol</div>
+              <div class="legend-item"><span class="legend-dot dot-stabilized"></span> Coherencia Cardíaca &amp; Ritmo Vagal Suave</div>
+            </div>
+          </div>
+
+          <div class="turb-explanation-grid">
+            <div class="turb-col">
+              <h4 class="text-danger"><i class="fa-solid fa-triangle-exclamation"></i> En Estado de Turbulencia:</h4>
+              <p>El sistema nervioso simpático se sobrecarga. Hay tensión mandibular, cuello rígido, visión de túnel y dificultad para tomar decisiones serenas.</p>
+            </div>
+            <div class="turb-col">
+              <h4 class="text-sage"><i class="fa-solid fa-shield-heart"></i> Con el Bio-Gimbal de los Árboles:</h4>
+              <p>Las raíces absorben la carga electromagnética excedente. La respiración se desacelera a 6 respiraciones por minuto y los 3 ejes somáticos vuelven al centro.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-Axis Biological Translation Cards -->
+        <div class="philosophy-grid mt-4">
+          <div class="philosophy-card tilt-card" data-axis="roll">
+            <div class="card-icon-wrapper">
+              <i class="fa-solid fa-tree"></i>
+              <span class="axis-tag">EJE ROLL: ENRAIZAMIENTO</span>
+            </div>
+            <h3>Firmeza ante la Tormenta</h3>
+            <p>
+              Así como las raíces profundas del roble y el cedro resisten vendavales, la conexión física con la corteza y la tierra descarga el miedo y restaura la estabilidad de tus piernas y pelvis.
+            </p>
+            <div class="card-stat">
+              <span class="stat-number">+85%</span>
+              <span class="stat-label">Sensación de seguridad física</span>
+            </div>
+          </div>
+
+          <div class="philosophy-card tilt-card" data-axis="pitch">
+            <div class="card-icon-wrapper">
+              <i class="fa-solid fa-mountain-sun"></i>
+              <span class="axis-tag">EJE PITCH: PERSPECTIVA</span>
+            </div>
+            <h3>Elevación por Encima del Caos</h3>
+            <p>
+              Bajo la copa de los eucaliptos y ceibas, el sistema nervioso sale del modo hipervigilante. Los fitoncidas volátiles reducen la inflamación cerebral, despejando la rumia mental.
+            </p>
+            <div class="card-stat">
+              <span class="stat-number">-70%</span>
+              <span class="stat-label">Pensamientos intrusivos</span>
+            </div>
+          </div>
+
+          <div class="philosophy-card tilt-card" data-axis="yaw">
+            <div class="card-icon-wrapper">
+              <i class="fa-solid fa-compass"></i>
+              <span class="axis-tag">EJE YAW: PROPÓSITO &amp; FLUIDEZ</span>
+            </div>
+            <h3>El Fluir del Sauce de Río</h3>
+            <p>
+              El sauce nos enseña a flexibilizarnos sin quebrarnos. La relajación de las fascias permite que la persona recupere su dirección vital con dulzura y paso firme.
+            </p>
+            <div class="card-stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Fluidez somática integrada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: SIMULADOR DE CONEXIÓN CON ÁRBOLES ANCESTRALES -->
+    <section class="section tree-lab-section" id="tree-simulator">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="header-split">
+            <div>
+              <span class="section-kicker">SIMULADOR BOTÁNICO DE SANACIÓN SOMÁTICA</span>
+              <h2 class="section-title">El Santuario de Árboles: Selecciona tu Alianza de Sanación</h2>
+              <p class="section-subtitle">
+                Cada árbol emite una firma bioenergética y compuestos químicos (fitoncidas, terpenos, savias) que dialogan con receptores específicos de nuestro sistema nervioso. Elige los árboles con los que deseas interactuar para equilibrar tu organismo y diseñar tu ruta de sanación.
+              </p>
+            </div>
+            <div class="spice-header-actions">
+              <button id="suggested-tree-alliance-btn" class="btn btn-outline-gold btn-sm">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Tríada Sugerida para Turbulencia
+              </button>
+              <button id="reset-trees-btn" class="btn btn-ghost btn-sm">
+                <i class="fa-solid fa-arrow-rotate-left"></i> Reiniciar Selección
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tree-workbench-layout">
+          <!-- Columna Izquierda: Los 8 Árboles Sagrados -->
+          <div class="trees-panel">
+            <h3 class="panel-title"><i class="fa-solid fa-leaf"></i> Árboles Terapéuticos (Haz click para interactuar y conectar)</h3>
+            
+            <div class="trees-grid" id="trees-grid">
+              <!-- Dynamically populated via script.js -->
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Mandala de Resonancia Arbórea y Biometría -->
+          <div class="tree-synthesis-panel">
+            <div class="mandala-visualization-box">
+              <div class="mandala-badge">CÍRCULO DE BIO-RESONANCIA ARBÓREA</div>
+              
+              <div class="mandala-container">
+                <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80" alt="Mandala de Resonancia con Árboles" class="mandala-base-img">
+                <canvas id="mandala-pulse-canvas" width="340" height="340"></canvas>
+                <div class="mandala-center-info">
+                  <span class="mandala-count" id="active-trees-count">0 Árboles</span>
+                  <span class="mandala-sub">Alianza Activa</span>
+                </div>
+              </div>
+
+              <!-- Badges de Árboles Seleccionados -->
+              <div class="selected-trees-tags" id="selected-trees-tags">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Panel de Neuro-Métricas Somáticas -->
+            <div class="tree-metrics-card">
+              <div class="alliance-naming-row">
+                <div>
+                  <span class="metric-label">NOMBRE DE TU ALIANZA ARBÓREA:</span>
+                  <input type="text" id="tree-custom-name" class="alliance-name-input" value="Alianza Roble &amp; Sauce de Río" placeholder="Ej: Tríada de Paz &amp; Raíces">
+                </div>
+                <div class="alliance-batch-code" id="alliance-code">SANACIÓN #TR-2026</div>
+              </div>
+
+              <!-- Barras de Purificación y Estabilización -->
+              <div class="neuro-bars-container">
+                <div class="neuro-bar-item">
+                  <div class="bar-header">
+                    <span><i class="fa-solid fa-anchor"></i> Enraizamiento Somático &amp; Firmeza (Raíces Profundas)</span>
+                    <span id="metric-grounding">0%</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" id="fill-grounding" style="width: 0%"></div></div>
+                </div>
+
+                <div class="neuro-bar-item">
+                  <div class="bar-header">
+                    <span><i class="fa-solid fa-wind"></i> Depuración Linfática &amp; Fitoncidas (Oxigenación)</span>
+                    <span id="metric-purification">0%</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill bar-fill-stim" id="fill-purification" style="width: 0%"></div></div>
+                </div>
+
+                <div class="neuro-bar-item">
+                  <div class="bar-header">
+                    <span><i class="fa-solid fa-scale-balanced"></i> Amortiguación de Turbulencia (Gimbal Somático)</span>
+                    <span id="metric-damping">0%</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill bar-fill-gaba" id="fill-damping" style="width: 0%"></div></div>
+                </div>
+
+                <div class="neuro-bar-item">
+                  <div class="bar-header">
+                    <span><i class="fa-solid fa-sun"></i> Claridad de la Copa &amp; Apertura Cardíaca</span>
+                    <span id="metric-crown">0%</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill bar-fill-heat" id="fill-crown" style="width: 0%"></div></div>
+                </div>
+              </div>
+
+              <!-- Notas de Sanación y Prescripción de Bosque -->
+              <div class="healing-prescription-box">
+                <div class="prescription-header"><i class="fa-solid fa-tree"></i> PRESCRIPCIÓN DE INTERACCIÓN SOMÁTICA:</div>
+                <p id="healing-prescription-text" class="prescription-content">
+                  Haz click en los árboles de la izquierda para incluirlos en tu alianza. Te recomendaremos cómo interactuar con ellos (abrazos de corteza, descanso en raíces, inhalación de fitoncidas) para sanar tu organismo.
+                </p>
+                <div class="ritual-tag-box" id="tree-ritual-tags">
+                  <span class="ritual-badge"><i class="fa-solid fa-hands"></i> Abrazo Consciente de Tronco</span>
+                  <span class="ritual-badge"><i class="fa-solid fa-lungs"></i> Respiración Shinrin-yoku</span>
+                  <span class="ritual-badge"><i class="fa-solid fa-spa"></i> Infusión de Hojas en Temazcal</span>
+                </div>
+              </div>
+
+              <!-- Acciones con la Alianza Arbórea -->
+              <div class="spice-actions-row">
+                <button id="bind-tree-alliance-btn" class="btn btn-gold w-full">
+                  <i class="fa-solid fa-link"></i> Vincular Alianza Arbórea a mi Ruta de Viaje
+                </button>
+                <button id="download-tree-cert-btn" class="btn btn-glass" title="Ver Certificado de la Alianza">
+                  <i class="fa-solid fa-file-arrow-down"></i> Certificado
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: SIMULADOR DE VIAJES & RUTAS PERSONALIZADAS ALL-INCLUSIVE -->
+    <section class="section trip-simulator-section" id="trip-simulator">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-kicker">ARQUITECTO DE EXPEDICIÓN ALL-INCLUSIVE</span>
+          <h2 class="section-title">Diseña tu Ruta de Regeneración y Apoyo a Emprendedores</h2>
+          <p class="section-subtitle">
+            Combina los bosques ancestrales con tratamientos regenerativos, gastronomía agroecológica de productores locales, transporte de suspensión suave y la presencia discreta de un filmmaker con gimbal para documentar tu renovación.
+          </p>
+        </div>
+
+        <!-- Stepper Visualizer -->
+        <div class="trip-stepper-nav">
+          <button class="step-btn active" data-step="1">
+            <span class="step-num">1</span>
+            <span class="step-txt">Santuario Arbóreo</span>
+          </button>
+          <div class="step-divider"></div>
+          <button class="step-btn" data-step="2">
+            <span class="step-num">2</span>
+            <span class="step-txt">Movilidad Suave</span>
+          </button>
+          <div class="step-divider"></div>
+          <button class="step-btn" data-step="3">
+            <span class="step-num">3</span>
+            <span class="step-txt">Rituales de Bosque</span>
+          </button>
+          <div class="step-divider"></div>
+          <button class="step-btn" data-step="4">
+            <span class="step-num">4</span>
+            <span class="step-txt">Catas &amp; Boticarios</span>
+          </button>
+          <div class="step-divider"></div>
+          <button class="step-btn" data-step="5">
+            <span class="step-num">5</span>
+            <span class="step-txt">Libros &amp; Filmmaker</span>
+          </button>
+        </div>
+
+        <div class="trip-builder-wrapper">
+          <!-- Main Interactive Steps Container -->
+          <div class="steps-content-container">
+            
+            <!-- STEP 1: Bioma y Destino Arbóreo -->
+            <div class="step-panel active" id="step-panel-1">
+              <h3 class="step-title"><i class="fa-solid fa-tree"></i> Paso 1: Selecciona el Santuario Forestal para tu Reset</h3>
+              <p class="step-desc">El ecosistema arbóreo define los fitoncidas presentes en el aire y la energía telúrica del suelo.</p>
+              
+              <div class="options-grid" id="biome-options-grid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- STEP 2: Movilidad Estabilizada -->
+            <div class="step-panel" id="step-panel-2">
+              <h3 class="step-title"><i class="fa-solid fa-route"></i> Paso 2: Elige tu Medio de Movilidad Adaptativa</h3>
+              <p class="step-desc">¿Prefieres pedalear silenciosamente entre los senderos de árboles o viajar en un auto eléctrico con suspensión hidroneumática que elimina los baches del camino?</p>
+              
+              <div class="options-grid" id="mobility-options-grid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- STEP 3: Tratamientos & Rituales Somáticos -->
+            <div class="step-panel" id="step-panel-3">
+              <h3 class="step-title"><i class="fa-solid fa-hand-holding-heart"></i> Paso 3: Tratamientos y Rituales Incluidos (Selecciona los deseados)</h3>
+              <p class="step-desc">Rituales de purificación integrados con hojas, resinas y leña de los árboles ancestrales para desintoxicar el sistema nervioso:</p>
+              
+              <div class="options-grid" id="treatments-options-grid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- STEP 4: Catas & Conexión con Emprendedores -->
+            <div class="step-panel" id="step-panel-4">
+              <h3 class="step-title"><i class="fa-solid fa-wheat-awn"></i> Paso 4: Experiencias Gastronómicas, Catas &amp; Tiendas Orgánicas</h3>
+              <p class="step-desc">Degustaciones de productos que crecen bajo la sombra de estos árboles, apoyando a familias campesinas y emprendimientos sostenibles:</p>
+              
+              <div class="options-grid" id="tastings-options-grid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- STEP 5: Libros Recomendados & Filmmaker Cinematográfico -->
+            <div class="step-panel" id="step-panel-5">
+              <h3 class="step-title"><i class="fa-solid fa-book-open-reader"></i> Paso 5: Lecturas para el Bosque &amp; Documentación Cinematográfica</h3>
+              <p class="step-desc">Un libro físico curado que te espera en tu cabaña, y la opción de contar con un filmmaker con gimbal motorizado para capturar tu renacimiento.</p>
+              
+              <div class="step-5-flex">
+                <div class="sub-column">
+                  <h4><i class="fa-solid fa-book"></i> Libro Curado Incluido en tu Welcome Kit</h4>
+                  <div class="books-selector-grid" id="books-options-grid">
+                    <!-- Injected via JS -->
+                  </div>
+                </div>
+
+                <div class="sub-column">
+                  <h4><i class="fa-solid fa-video"></i> Filmmaker &amp; Fotógrafo Dedicado (Gimbal 3-Ejes)</h4>
+                  <div class="filmmaker-card" id="filmmaker-card-container">
+                    <!-- Injected via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons between Steps -->
+            <div class="step-controls-bar">
+              <button id="prev-step-btn" class="btn btn-ghost" disabled>
+                <i class="fa-solid fa-arrow-left"></i> Anterior
+              </button>
+              <div class="step-counter-label" id="step-counter-label">Paso 1 de 5</div>
+              <button id="next-step-btn" class="btn btn-gold">
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sticky Sidebar Summary: Resumen de la Expedición All-Inclusive -->
+          <aside class="trip-summary-sidebar">
+            <div class="summary-card">
+              <div class="summary-header">
+                <h3><i class="fa-solid fa-compass-drafting"></i> Resumen de tu Expedición</h3>
+                <span class="all-inclusive-badge">ALL INCLUSIVE VIP</span>
+              </div>
+
+              <!-- Linked Tree Alliance Notice -->
+              <div class="linked-spice-pill" id="summary-linked-tree-box">
+                <i class="fa-solid fa-tree"></i>
+                <div>
+                  <div class="pill-label">ALIANZA ARBÓREA VINCULADA:</div>
+                  <div class="pill-title" id="summary-tree-name">Roble &amp; Sauce de Río</div>
+                </div>
+              </div>
+
+              <!-- Itemized List -->
+              <div class="summary-items-list" id="summary-items-list">
+                <!-- Dynamically filled -->
+              </div>
+
+              <!-- Metric Gauges in Summary -->
+              <div class="summary-metrics">
+                <div class="metric-row">
+                  <span>Índice de Estabilización Somática:</span>
+                  <strong class="text-gold" id="summary-stabilization-index">88% (Protección Alta)</strong>
+                </div>
+                <div class="metric-row">
+                  <span>Emprendimientos Locales Apoyados:</span>
+                  <strong class="text-sage" id="summary-entrepreneur-count">3 Proyectos</strong>
+                </div>
+                <div class="metric-row">
+                  <span>Amortiguación de Turbulencia:</span>
+                  <strong id="summary-gimbal-profile">Gimbal Suave 1.0x</strong>
+                </div>
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <!-- Total Price Display -->
+              <div class="price-breakdown-row">
+                <div>
+                  <span class="total-label">Inversión All-Inclusive:</span>
+                  <div class="payment-terms">Hospedaje bioclimático, rituales de bosque, catas, libro y traslados</div>
+                </div>
+                <div class="total-price" id="summary-total-price">$1,450 USD</div>
+              </div>
+
+              <!-- Actions -->
+              <button id="book-expedition-btn" class="btn btn-gold btn-glow w-full mt-3">
+                <i class="fa-solid fa-calendar-check"></i> Reservar Expedición Personalizada
+              </button>
+              <button id="preview-custom-reel-btn" class="btn btn-glass w-full mt-2">
+                <i class="fa-solid fa-play"></i> Ver Reel Simulado de Esta Ruta
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: REELS DE CLIENTES REALES (INTERACTIVO 9:16) -->
+    <section class="section reels-showcase-section" id="reels-showcase">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-kicker">CINEMATOGRAFÍA SOMÁTICA &amp; VIVENCIA REAL</span>
+          <h2 class="section-title">El Pequeño Reel: Superando Momentos Turbulentos</h2>
+          <p class="section-subtitle">
+            Cada paquete de viaje cuenta con su propia vivencia grabada en video vertical de alta fidelidad con cámara estabilizada por gimbal. Descubre cómo nuestros clientes transformaron la pesadez y el estrés en calma cristalina conectando con los árboles:
+          </p>
+        </div>
+
+        <div class="reel-interactive-stage">
+          <!-- Selector de Reels por Paquete -->
+          <div class="reel-selector-tabs" id="reel-tabs-list">
+            <button class="reel-tab-btn active" data-reel-index="0">
+              <i class="fa-solid fa-fire-burner"></i>
+              <div>
+                <strong>Ruta Bosque Ancestral &amp; Temazcal</strong>
+                <span>Cliente: Valentina M. (Superación de Agotamiento)</span>
+              </div>
+            </button>
+            <button class="reel-tab-btn" data-reel-index="1">
+              <i class="fa-solid fa-person-biking"></i>
+              <div>
+                <strong>Ruta Gravel Bike &amp; Eucaliptos</strong>
+                <span>Cliente: Martín G. (Claridad en Crisis)</span>
+              </div>
+            </button>
+            <button class="reel-tab-btn" data-reel-index="2">
+              <i class="fa-solid fa-mug-saucer"></i>
+              <div>
+                <strong>Ruta Sauces, Cacao &amp; Corte Ritual</strong>
+                <span>Clientes: Sofía &amp; David (Reconexión Afectiva)</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Smartphone 9:16 Mockup Player -->
+          <div class="phone-reel-container">
+            <div class="phone-frame">
+              <!-- Notch / Dynamic Island -->
+              <div class="phone-notch">
+                <span class="notch-lens"></span>
+              </div>
+
+              <!-- Reel Screen Content -->
+              <div class="reel-screen" id="reel-screen">
+                <!-- Video Simulator Image Background -->
+                <div class="reel-media-wrapper">
+                  <img id="reel-bg-image" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Reel de Experiencia Grabada" class="reel-bg-visual">
+                  <div class="reel-vignette-overlay"></div>
+                </div>
+
+                <!-- Story / Reel Progress Bar Ticks -->
+                <div class="reel-progress-bars">
+                  <div class="progress-bar-slot active"><div class="progress-fill" id="reel-progress-fill"></div></div>
+                  <div class="progress-bar-slot"><div class="progress-fill"></div></div>
+                  <div class="progress-bar-slot"><div class="progress-fill"></div></div>
+                </div>
+
+                <!-- Gimbal HUD Overlay inside the Reel -->
+                <div class="reel-gimbal-hud">
+                  <div class="hud-top-meta">
+                    <span class="hud-rec"><span class="rec-dot"></span> 4K REC 60FPS</span>
+                    <span class="hud-gimbal-indicator"><i class="fa-solid fa-scale-balanced"></i> BIO-GIMBAL FLUIDO</span>
+                  </div>
+                  <div class="hud-crosshair-brackets"></div>
+                </div>
+
+                <!-- Sound Toggle inside Reel -->
+                <button class="reel-sound-btn" id="reel-sound-toggle" aria-label="Silenciar o activar sonido">
+                  <i class="fa-solid fa-volume-high" id="reel-sound-icon"></i>
+                </button>
+
+                <!-- Reel Info Overlays -->
+                <div class="reel-meta-bottom">
+                  <div class="reel-client-tag" id="reel-client-name">Valentina M. • Bosque de Robles &amp; Temazcal</div>
+                  <p class="reel-quote" id="reel-client-quote">
+                    "Venía de una separación muy dura y con el cuerpo en alerta constante. Abrazar el roble centenario y entrar al temazcal con vapor de hojas medicinales me devolvió un eje que creía perdido."
+                  </p>
+                  
+                  <div class="reel-telemetry-tags">
+                    <span class="tel-tag"><i class="fa-solid fa-heart-pulse"></i> HRV: 32 → 81 ms</span>
+                    <span class="tel-tag"><i class="fa-solid fa-shield"></i> Turbulencia: Amortiguada</span>
+                    <span class="tel-tag"><i class="fa-solid fa-tree"></i> Alianza: Roble &amp; Eucalipto</span>
+                  </div>
+                </div>
+
+                <!-- Right Side Reel Interaction Icons -->
+                <div class="reel-sidebar-actions">
+                  <button class="reel-side-btn like-btn" id="reel-like-btn" title="Me conmueve">
+                    <i class="fa-solid fa-heart" id="reel-like-icon"></i>
+                    <span id="reel-likes-counter">1.6k</span>
+                  </button>
+                  <button class="reel-side-btn" id="reel-apply-pack-btn" title="Quiero este mismo paquete">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Elegir</span>
+                  </button>
+                  <button class="reel-side-btn" id="reel-play-pause-btn" title="Pausar / Reproducir">
+                    <i class="fa-solid fa-pause" id="reel-play-icon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Client Transformation Card Next to the Reel -->
+            <div class="reel-transformation-dossier">
+              <div class="dossier-card">
+                <div class="dossier-header">
+                  <span class="dossier-badge">EXPEDIENTE DE ESTABILIZACIÓN SOMÁTICA</span>
+                  <h3 id="dossier-title">Caso Valentina M. — De la Turbulencia a la Paz</h3>
+                </div>
+
+                <div class="dossier-stats-comparison">
+                  <div class="comparison-col before">
+                    <span class="col-title">ESTADO EN TURBULENCIA:</span>
+                    <ul>
+                      <li><i class="fa-solid fa-xmark text-danger"></i> Sistema simpático disparado (duelo y ansiedad)</li>
+                      <li><i class="fa-solid fa-xmark text-danger"></i> Frecuencia en reposo: 86 bpm con palpitaciones</li>
+                      <li><i class="fa-solid fa-xmark text-danger"></i> Espasmos cervicales e insomnio crónico</li>
+                    </ul>
+                  </div>
+
+                  <div class="comparison-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+
+                  <div class="comparison-col after">
+                    <span class="col-title">ESTADO TRAS LA EXPEDICIÓN:</span>
+                    <ul>
+                      <li><i class="fa-solid fa-check text-sage"></i> Amortiguación somática plena (eje restaurado)</li>
+                      <li><i class="fa-solid fa-check text-sage"></i> Frecuencia en reposo: 57 bpm estable</li>
+                      <li><i class="fa-solid fa-check text-sage"></i> Sueño reparador de 8h y respiración diafragmática</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="dossier-features-included">
+                  <h4>Factores Determinantes de la Recuperación:</h4>
+                  <div class="feature-pills-row" id="dossier-pills">
+                    <span class="d-pill"><i class="fa-solid fa-tree"></i> Baño de Bosque de Robles</span>
+                    <span class="d-pill"><i class="fa-solid fa-fire"></i> Temazcal con Hojas de Eucalipto</span>
+                    <span class="d-pill"><i class="fa-solid fa-hands"></i> Masaje Craneosacral</span>
+                    <span class="d-pill"><i class="fa-solid fa-camera"></i> Filmmaker Gimbal Ronin 4K</span>
+                  </div>
+                </div>
+
+                <button class="btn btn-outline-gold w-full mt-4" id="clone-case-pack-btn">
+                  <i class="fa-solid fa-copy"></i> Cargar Este Paquete Exacto en el Simulador
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TIENDAS ORGÁNICAS & BOTICARIOS DEL BOSQUE -->
+    <section class="section artisans-section" id="local-artisans">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-kicker">ECOSISTEMA REGENERATIVO &amp; PRODUCTOS DE CALIDAD</span>
+          <h2 class="section-title">Boticarios y Tiendas con Productos Naturales de los Bosques</h2>
+          <p class="section-subtitle">
+            Durante las paradas de tu ruta, visitarás boticarios y emprendimientos artesanales que trabajan en armonía con los árboles: resinas medicinales, mieles de bosque, cosmética orgánica y jabones saponificados:
+          </p>
+        </div>
+
+        <div class="artisans-grid">
+          <div class="artisan-card">
+            <div class="artisan-badge">BOTICARIO DE BOSQUE</div>
+            <div class="artisan-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80" alt="Boticario Resinas y Raíces" class="artisan-img">
+            </div>
+            <div class="artisan-body">
+              <h3>Boticario "Resinas &amp; Raíces del Bosque"</h3>
+              <p class="artisan-location"><i class="fa-solid fa-location-dot"></i> Bosque de Robles, Parada Km 8</p>
+              <p class="artisan-desc">
+                Tinturas de corteza de sauce, ungüentos de resina de pino silvestre recolectada de forma no lesiva, e hidrolatos de hojas de eucalipto para masajes descontracturantes.
+              </p>
+              <div class="artisan-tags">
+                <span>100% Orgánico</span>
+                <span>Recolección Ética</span>
+                <span>Fitoncidas Puros</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="artisan-card">
+            <div class="artisan-badge">COOPERATIVA AGROECOLÓGICA</div>
+            <div class="artisan-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80" alt="Cacao de Bosque y Miel de Azahar" class="artisan-img">
+            </div>
+            <div class="artisan-body">
+              <h3>Chocolatería de Sombra &amp; Miel Melipona</h3>
+              <p class="artisan-location"><i class="fa-solid fa-location-dot"></i> Valle de los Sauces, Sendero Antiguo</p>
+              <p class="artisan-desc">
+                Cacao ancestral cultivado bajo el dosel protector de árboles madre y miel medicinal de abejas nativas que liban flores silvestres de montaña.
+              </p>
+              <div class="artisan-tags">
+                <span>Agroforestería</span>
+                <span>Comercio Justo</span>
+                <span>Degustación Incluida</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="artisan-card">
+            <div class="artisan-badge">COSMÉTICA BOTÁNICA LIMPIA</div>
+            <div class="artisan-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Taller de Savias y Arcillas" class="artisan-img">
+            </div>
+            <div class="artisan-body">
+              <h3>Taller Dérmico "Savia Serena"</h3>
+              <p class="artisan-location"><i class="fa-solid fa-location-dot"></i> Quebrada del Eucalipto, Cabaña 4</p>
+              <p class="artisan-desc">
+                Productos faciales elaborados con savia de abedul purificada, arcillas termales de raíces y aceites prensados en frío para calmar pieles reactivas por estrés.
+              </p>
+              <div class="artisan-tags">
+                <span>Vegano</span>
+                <span>Biodegradable</span>
+                <span>Testado en Pieles Sensibles</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- DRAWER: ITINERARIO COMPLETO & RESERVA VIP -->
+  <div class="itinerary-drawer-backdrop" id="itinerary-backdrop"></div>
+  <aside class="itinerary-drawer" id="itinerary-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <i class="fa-solid fa-tree text-gold"></i>
+        <h3>Tu Expedición de Sanación</h3>
+      </div>
+      <button class="drawer-close-btn" id="close-itinerary-btn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Status Notice -->
+      <div class="drawer-status-card">
+        <div class="status-icon"><i class="fa-solid fa-circle-check text-sage"></i></div>
+        <div>
+          <h4>Bio-Gimbal Somático Calibrado</h4>
+          <p>Tu itinerario cuenta con protección contra turbulencias emocionales y soporte de árboles ancestrales.</p>
+        </div>
+      </div>
+
+      <!-- Resumen de la Alianza Arbórea Creada -->
+      <div class="drawer-section">
+        <h4 class="drawer-subheading"><i class="fa-solid fa-seedling"></i> Alianza de Árboles Seleccionada:</h4>
+        <div class="drawer-spice-detail" id="drawer-spice-detail">
+          <p class="text-muted">Roble Ancestral, Sauce de Río &amp; Eucalipto de Montaña.</p>
+        </div>
+      </div>
+
+      <!-- Resumen del Itinerario de Viaje -->
+      <div class="drawer-section">
+        <h4 class="drawer-subheading"><i class="fa-solid fa-map-location"></i> Componentes del Viaje:</h4>
+        <div class="drawer-trip-details" id="drawer-trip-details">
+          <!-- Filled via JS -->
+        </div>
+      </div>
+
+      <!-- Formulario de Contacto / Reserva Directa -->
+      <div class="drawer-section booking-form-box">
+        <h4 class="drawer-subheading"><i class="fa-solid fa-paper-plane"></i> Confirmar Disponibilidad de Expedición:</h4>
+        <form id="expedition-booking-form" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label for="client-name">Nombre y Apellido:</label>
+            <input type="text" id="client-name" class="form-input" placeholder="Ej: Valentina Morales" required>
+          </div>
+          <div class="form-group">
+            <label for="client-email">Correo Electrónico:</label>
+            <input type="email" id="client-email" class="form-input" placeholder="tu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="client-date">Fecha Deseada para tu Retiro:</label>
+            <input type="date" id="client-date" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="client-notes">¿Qué turbulencia o situación personal deseas calmar y sanar? (Confidencial):</label>
+            <textarea id="client-notes" class="form-input" rows="2" placeholder="Ej: Necesito pausar tras una pérdida / sobrecarga laboral / reconectar conmigo..."></textarea>
+          </div>
+
+          <div class="drawer-total-box">
+            <span>Inversión Final Estimada:</span>
+            <span class="drawer-price" id="drawer-total-price">$1,450 USD</span>
+          </div>
+
+          <button type="submit" id="submit-booking-btn" class="btn btn-gold w-full mt-3">
+            <i class="fa-solid fa-shield-halved"></i> Confirmar Reserva &amp; Activar Expedición
+          </button>
+        </form>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MODAL: CERTIFICADO DE ALIANZA ARBÓREA -->
+  <div class="modal-backdrop" id="certificate-modal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="close-certificate-btn"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="certificate-container" id="printable-certificate">
+        <div class="cert-border">
+          <div class="cert-header">
+            <i class="fa-solid fa-tree cert-logo"></i>
+            <h2>SYNAPSE &amp; ÁRBOLES ANCESTRALES</h2>
+            <span class="cert-sub">CERTIFICADO DE ALIANZA SOMÁTICA &amp; PURIFICACIÓN RAMIFICADA</span>
+          </div>
+
+          <div class="cert-body">
+            <div class="cert-formula-name" id="cert-name">Alianza Roble &amp; Sauce de Río</div>
+            <p class="cert-intro">
+              Se certifica que la presente conexión bio-energética con árboles ancestrales ha sido calibrada como un bio-gimbal somático para estabilizar el organismo y purificar las ramificaciones del sistema nervioso central en momentos de turbulencia personal.
+            </p>
+
+            <div class="cert-ingredients-list" id="cert-ingredients-list">
+              <!-- Dynamically listed -->
+            </div>
+
+            <div class="cert-sensory-grid">
+              <div><strong>Frecuencia Bioeléctrica:</strong> 528 Hz (Regeneración)</div>
+              <div><strong>Respuesta Somática:</strong> Tono Vagal Alto</div>
+              <div><strong>Vía de Asimilación:</strong> Contacto de Corteza &amp; Fitoncidas</div>
+              <div><strong>Estabilización:</strong> Amortiguación Activa</div>
+            </div>
+          </div>
+
+          <div class="cert-footer">
+            <div class="cert-sign">
+              <span class="sign-line"></span>
+              <span>Guardián del Santuario Arbóreo</span>
+            </div>
+            <div class="cert-seal">
+              <i class="fa-solid fa-certificate"></i>
+              <span>SELLO DEL BOSQUE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-gold" id="print-certificate-btn">
+          <i class="fa-solid fa-print"></i> Imprimir o Guardar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand-symbol"><i class="fa-solid fa-tree"></i></div>
+        <h3>SYNAPSE &amp; ÁRBOLES ANCESTRALES</h3>
+        <p>
+          Santuario de Regeneración Somática &amp; Rutas de Estabilización. La tecnología natural de los árboles aliada con la sensibilidad de un gimbal para que tu organismo recupere su paz y fluidez en cualquier momento de tu vida.
+        </p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Conexiones</h4>
+        <ul>
+          <li><a href="#tree-simulator">Santuario de Árboles</a></li>
+          <li><a href="#bio-gimbal-concept">El Bio-Gimbal Somático</a></li>
+          <li><a href="#trip-simulator">Diseñador de Rutas</a></li>
+          <li><a href="#reels-showcase">Reels de Sanación</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Tratamientos de Bosque</h4>
+        <ul>
+          <li><a href="#trip-simulator">Temazcal con Hojas Medicinales</a></li>
+          <li><a href="#trip-simulator">Masaje Craneosacral</a></li>
+          <li><a href="#trip-simulator">Corte de Cabello Ritual</a></li>
+          <li><a href="#local-artisans">Chocolatería de Sombra</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Filosofía de Amortiguación</h4>
+        <p class="small-text">
+          "Un árbol no lucha contra el viento: enraíza su base y balancea suavemente sus ramas. El bio-gimbal es ese mismo principio viviendo dentro de ti."
+        </p>
+        <div class="social-icons-row">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SYNAPSE &amp; ÁRBOLES ANCESTRALES — Purificación Ramificada &amp; Estabilización Somática.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Archivos del sistema y temporales
+.DS_Store
+Thumbs.db
+*.log
+test.html
+
+# Directorios de entorno local
+.vscode/
+.idea/
